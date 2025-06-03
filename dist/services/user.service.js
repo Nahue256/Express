@@ -36,11 +36,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.getAllUsers = exports.getUserById = exports.createUser = void 0;
 const userRepository = __importStar(require("../repositories/user.repository"));
 const createUser = async (userData) => {
-    const existingUser = await userRepository.findByEmail(userData.email);
-    if (existingUser) {
+    const existingUserEmail = await userRepository.findByEmail(userData.email);
+    const existingUsername = await userRepository.findByUsername(userData.username);
+    if (existingUserEmail) {
         throw new Error('User with this email already exists');
     }
-    // In a real application, you would hash the password here
+    if (existingUsername) {
+        throw new Error('User with this username already exists');
+    }
     return userRepository.create(userData);
 };
 exports.createUser = createUser;

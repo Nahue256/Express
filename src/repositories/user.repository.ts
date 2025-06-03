@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm';
 import { User, UserEntity, createUser, sanitizeUser } from '../entities/user.entity';
 import { UserCreateInput, UserUpdateInput } from '../interfaces/user.interface';
-import { AppDataSource } from '../../src/config/database';
+import { AppDataSource } from '../config/database';
 
 type SafeUser = Omit<User, 'password'>;
 const userRepository: Repository<User> = AppDataSource.getRepository(UserEntity);

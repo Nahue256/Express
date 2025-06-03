@@ -14,7 +14,7 @@ const router = (0, express_1.Router)();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/UserCreate'
  *     responses:
  *       201:
  *         description: The user was successfully created
@@ -70,6 +70,7 @@ router.get('/', user_controller_1.getAllUsers);
  *         name: id
  *         schema:
  *           type: string
+ *           format: uuid
  *         required: true
  *         description: The user id
  *     responses:
@@ -101,6 +102,7 @@ router.get('/:id', user_controller_1.getUser);
  *         name: id
  *         schema:
  *           type: string
+ *           format: uuid
  *         required: true
  *         description: The user id
  *     requestBody:
@@ -108,7 +110,7 @@ router.get('/:id', user_controller_1.getUser);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/UserUpdate'
  *     responses:
  *       200:
  *         description: The user was updated
@@ -138,6 +140,7 @@ router.put('/:id', user_controller_1.updateUser);
  *         name: id
  *         schema:
  *           type: string
+ *           format: uuid
  *         required: true
  *         description: The user id
  *     responses:

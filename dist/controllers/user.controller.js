@@ -57,6 +57,12 @@ const getUser = async (req, res, next) => {
         });
     }
     catch (error) {
+        if (error.message === 'User not found') {
+            res.status(404).json({
+                status: 'error',
+                message: 'User not found'
+            });
+        }
         next(error);
     }
 };
@@ -78,7 +84,7 @@ const updateUser = async (req, res, next) => {
     try {
         const user = await userService.updateUser(req.params.id, req.body);
         res.json({
-            status: 'success',
+            status: 'User successfully updated',
             data: { user }
         });
     }
@@ -91,8 +97,7 @@ const deleteUser = async (req, res, next) => {
     try {
         await userService.deleteUser(req.params.id);
         res.json({
-            status: 'success',
-            data: null
+            status: 'User successfully deleted'
         });
     }
     catch (error) {

@@ -22,48 +22,87 @@ const options = {
             schemas: {
                 User: {
                     type: 'object',
-                    required: ['username', 'email', 'password'],
                     properties: {
                         id: {
                             type: 'string',
-                            description: 'The auto-generated id of the user',
+                            format: 'uuid',
+                            description: 'The auto-generated UUID of the user',
+                            readOnly: true
                         },
                         username: {
                             type: 'string',
-                            description: 'The username of the user',
+                            description: 'The username of the user'
                         },
                         email: {
                             type: 'string',
                             format: 'email',
-                            description: 'The email of the user',
+                            description: 'The email of the user'
                         },
                         password: {
                             type: 'string',
                             description: 'The password of the user',
-                            writeOnly: true,
+                            writeOnly: true
                         },
                         createdAt: {
                             type: 'string',
                             format: 'date-time',
                             description: 'The timestamp of when the user was created',
+                            readOnly: true
+                        }
+                    }
+                },
+                UserCreate: {
+                    type: 'object',
+                    required: ['username', 'email', 'password'],
+                    properties: {
+                        username: {
+                            type: 'string',
+                            description: 'The username of the user'
                         },
-                    },
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            description: 'The email of the user'
+                        },
+                        password: {
+                            type: 'string',
+                            description: 'The password of the user'
+                        }
+                    }
+                },
+                UserUpdate: {
+                    type: 'object',
+                    properties: {
+                        username: {
+                            type: 'string',
+                            description: 'The username of the user'
+                        },
+                        email: {
+                            type: 'string',
+                            format: 'email',
+                            description: 'The email of the user'
+                        },
+                        password: {
+                            type: 'string',
+                            description: 'The password of the user'
+                        }
+                    }
                 },
                 Error: {
                     type: 'object',
                     properties: {
                         status: {
                             type: 'string',
-                            example: 'error',
+                            example: 'error'
                         },
                         message: {
-                            type: 'string',
-                        },
-                    },
-                },
-            },
-        },
+                            type: 'string'
+                        }
+                    }
+                }
+            }
+        }
     },
-    apis: ['./src/routes/*.ts'], // Updated to look for TypeScript files
+    apis: ['./src/routes/*.ts']
 };
 exports.default = (0, swagger_jsdoc_1.default)(options);
